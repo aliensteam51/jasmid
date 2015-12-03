@@ -1,11 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<script src="stream.js"></script>
-		<script src="midifile.js"></script>
-		<script src="replayer.js"></script>
-		<script src="synth.js"></script>
-		<script src="audio.js"></script>
+		<script src="jasmid.js"></script>
 		<script>
 			function loadRemote(path, callback) {
 				var fetch = new XMLHttpRequest();
@@ -26,13 +22,13 @@
 				}
 				fetch.send();
 			}
-			
+
 			function play(file) {
 				loadRemote(file, function(data) {
-					midiFile = MidiFile(data);
-					synth = Synth(44100);
-					replayer = Replayer(midiFile, synth);
-					audio = AudioPlayer(replayer);
+					midiFile = jasmid.MidiFile(data);
+					synth = jasmid.Synth.Synth(44100);
+					replayer = jasmid.Replayer(midiFile, synth);
+					audio = jasmid.Audio.AudioPlayer(replayer);
 				})
 			}
 
@@ -56,10 +52,10 @@
 							reader = new FileReader()
 						;
 						reader.onload = function(e){
-							midiFile = MidiFile(e.target.result);
-							synth = Synth(44100);
-							replayer = Replayer(midiFile, synth);
-							audio = AudioPlayer(replayer);
+							midiFile = jasmid.MidiFile(e.target.result);
+							synth = jasmid.Synth(44100);
+							replayer = jasmid.Replayer(midiFile, synth);
+							audio = jasmid.Audio.AudioPlayer(replayer);
 						};
 						reader.readAsBinaryString(file);
 					}

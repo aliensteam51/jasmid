@@ -1,8 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<script src="synth.js"></script>
-		<script src="audio.js"></script>
+		<script src="jasmid.js"></script>
 		<script src="gui.min.js"></script>
 		<script>
 			function makeGui() {
@@ -15,7 +14,7 @@
 				gui.add(TestProgram, 'releaseTime', 0, 1);
 				gui.add(TestProgram, 'phase', 0, 1);
 			}
-			
+
 			TestProgram = {
 				'waveform': 0,
 				'attackAmplitude': 0.2,
@@ -25,17 +24,17 @@
 				'releaseTime': 0.02,
 				'phase': 0.5,
 				'createNote': function(note, velocity) {
-					var frequency = midiToFrequency(note);
-					return ADSRGenerator(
-						(this.waveform ? SquareGenerator(frequency, this.phase) : SineGenerator(frequency)),
+					var frequency = jasmid.Synth.midiToFrequency(note);
+					return jasmid.Synth.ADSRGenerator(
+						(this.waveform ? jasmid.Synth.SquareGenerator(frequency, this.phase) : jasmid.Synth.SineGenerator(frequency)),
 						this.attackAmplitude * (velocity / 128), this.sustainAmplitude * (velocity / 128),
 						this.attackTime, this.decayTime, this.releaseTime
 					);
 				}
 			}
-			
+
 			function go(file) {
-				synth = Synth(44100);
+				synth = jasmid.Synth.Synth(44100);
 				var samplesToNextNote = 0;
 				var currentGenerator = null;
 				var noteNumber = 0;
@@ -44,7 +43,7 @@
 						var data = new Array(samples*2);
 						var samplesRemaining = samples;
 						var dataOffset = 0;
-						
+
 						while (samplesRemaining) {
 							if (samplesToNextNote < samplesRemaining) {
 								if (samplesToNextNote > 0) {
@@ -69,7 +68,7 @@
 						return data;
 					}
 				}
-				audio = AudioPlayer(replayer, {'latency': 0.5});
+				audio = jasmid.Audio.AudioPlayer(replayer, {'latency': 0.5});
 			}
 		</script>
 	</head>
