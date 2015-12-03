@@ -2,6 +2,9 @@ jasmid - A Javascript MIDI file reader and synthesiser
 
 Originally presented at BarCamp London 8, 13-14 November 2010
 
+Running it:
+```browserify index.js --standalone jasmid > jasmid.js```
+
 Instructions:
 Open index.html in browser. Turn up volume. Click on link.
 
