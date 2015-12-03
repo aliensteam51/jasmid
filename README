@@ -10,8 +10,6 @@ browser supports:
 * Mozilla Audio Data API <https://wiki.mozilla.org/Audio_Data_API>
 * Web Audio API
     <https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html>
-* a Flash fallback originally taken from dynamicaudio.js by Ben Firshman
-    <https://github.com/bfirsh/dynamicaudio.js> and hacked around by me.
 
 
 The code:
